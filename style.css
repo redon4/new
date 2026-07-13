@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 1px solid turquoise;
+}
+
+html,
+body {
+    width: 100%;
+}
+
+/* *,
+*::before,
+*::after {
+    box-sizing: border-box;
+} */
+
+body {
+    color: white;
+    background-color: black;
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+a {
+    color: greenyellow;
+}
+
+header {
+    text-align: center;
+    .title {
+        color: greenyellow;
+        font-size: 1cm;
+
+        font-weight: 700;
+        width: 100vw;
+        text-decoration: none;
+
+
+    }
+}
