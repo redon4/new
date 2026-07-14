@@ -23,7 +23,7 @@ body {
 
     display: grid;
 
-    min-height: 100vh;
+    min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
@@ -46,16 +46,31 @@ a {
 
 header {
     text-align: center;
+    position: sticky;
+    top: 0;
 
 
     .title {
         color: greenyellow;
-        font-size: 1cm;
+        font-size: 2.5rem;
 
         font-weight: 700;
-        width: 100vw;
+        width: 100dvw;
         text-decoration: none;
 
+        display: inline-flex;
+        width: max-content;
 
+
+
+        &:hover {
+            color: color-mix(in srgb, greenyellow 50%, white);
+            transform: translateY(-1.5px);
+        }
+
+        &:focus {
+            color: white;
+            /* transform: translateY(calc(50dvh - 50%)); */
+        }
     }
 }
