@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    border: 1px solid turquoise;
+    /* border: 1px solid turquoise; */
 }
 
 html,
@@ -17,11 +17,27 @@ body {
 
 body {
     color: white;
-    background-color: black;
+
+    background: #00FF00;
+    background: radial-gradient(circle, rgba(0, 255, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+
     display: grid;
+
     min-height: 100vh;
     grid-template-rows: auto 1fr auto;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    header,
+    footer {
+
+        /* From https://css.glass */
+        background: rgba(255, 255, 255, 0.19);
+        /* border-radius: 16px; */
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5.7px);
+        -webkit-backdrop-filter: blur(5.7px);
+
+    }
 }
 
 a {
@@ -30,6 +46,8 @@ a {
 
 header {
     text-align: center;
+
+
     .title {
         color: greenyellow;
         font-size: 1cm;
