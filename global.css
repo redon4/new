@@ -26,22 +26,21 @@ body {
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-
-    header,
-    footer {
-
-        /* From https://css.glass */
-        background: rgba(255, 255, 255, 0.19);
-        /* border-radius: 16px; */
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(5.7px);
-        -webkit-backdrop-filter: blur(5.7px);
-
-    }
 }
 
 a {
     color: greenyellow;
+}
+
+header,
+footer {
+
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.19);
+    /* border-radius: 16px; */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.7px);
+    -webkit-backdrop-filter: blur(5.7px);
 }
 
 header {
@@ -51,7 +50,8 @@ header {
 
 
     .title {
-        color: greenyellow;
+        --header-color: greenyellow;
+        color: var(--header-color);
         font-size: 2.5rem;
 
         font-weight: 700;
@@ -64,8 +64,8 @@ header {
 
 
         &:hover {
-            color: color-mix(in srgb, greenyellow 50%, white);
-            transform: translateY(-1.5px);
+            color: color-mix(in srgb, var(--header-color) 50%, white);
+            transform: translateY(-2.5px);
         }
 
         &:focus {
