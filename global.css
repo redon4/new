@@ -49,6 +49,7 @@ header {
     text-align: center;
     position: sticky;
     top: 0;
+    z-index: 2;
 }
 
 
@@ -56,7 +57,7 @@ header {
 .title__icon {
     --header-color: greenyellow;
     color: var(--header-color);
-    font-size: 2.5rem;
+    font-size: 2.9rem;
 
     background: transparent;
     text-decoration: none;
@@ -74,10 +75,8 @@ header {
     position: relative;
 
 
-
     &:hover {
         color: color-mix(in srgb, var(--header-color) 50%, white);
-
     }
 
     &:active {
@@ -85,8 +84,6 @@ header {
 
         /* -webkit-filter: invert(100%);
             filter: invert(100%); */
-
-        /* transform: translateY(calc(50dvh - 50%)); */
     }
 }
 
@@ -97,11 +94,16 @@ header {
 .title__icon {
     position: fixed;
     right: 0;
-    padding-right: 1%;
+    padding-right: 2%;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%)
+        /* rotate(0deg)*/
+    ;
+
+    /* transition: transform 0.2s ease-in-out, opacity 0.25s ease-out; */
 
 }
+
 
 /* #title::after {
     content: "";
@@ -121,7 +123,7 @@ header {
 
 
 #hamburger-menu {
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 1.5rem;
     text-align: center;
@@ -132,7 +134,10 @@ header {
     right: 0;
 
     border-top: 0.1rem solid black;
-    z-index: 10;
+    z-index: 1;
+
+    transform: translateY(-100%);
+
 }
 
 .hamburger-menu__link {
