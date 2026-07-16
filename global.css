@@ -77,7 +77,6 @@ header {
 
     &:hover {
         color: color-mix(in srgb, var(--header-color) 50%, white);
-        transform: translateY(-2.5px);
 
     }
 
@@ -89,6 +88,10 @@ header {
 
         /* transform: translateY(calc(50dvh - 50%)); */
     }
+}
+
+#title:hover {
+    transform: translateY(-2.5px);
 }
 
 .title__icon {
