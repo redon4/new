@@ -26,6 +26,7 @@ body {
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /* cursor: default; */
 }
 
 a {
@@ -34,7 +35,7 @@ a {
 
 header,
 footer,
-.hamburger-menu {
+#hamburger-menu {
 
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.19);
@@ -48,56 +49,85 @@ header {
     text-align: center;
     position: sticky;
     top: 0;
+}
 
 
-    .title {
-        --header-color: greenyellow;
-        color: var(--header-color);
-        font-size: 2.5rem;
+#title,
+.title__icon {
+    --header-color: greenyellow;
+    color: var(--header-color);
+    font-size: 2.5rem;
 
-        background: transparent;
-        text-decoration: none;
-        border: 0;
-        padding: 0;
-        cursor: pointer;
+    background: transparent;
+    text-decoration: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
 
-        font-weight: 700;
-        width: 100dvw;
-        text-decoration: none;
+    font-weight: 700;
+    width: 100dvw;
+    text-decoration: none;
 
-        display: inline-flex;
-        width: max-content;
+    display: inline-flex;
+    width: max-content;
+
+    position: relative;
 
 
 
-        &:hover {
-            color: color-mix(in srgb, var(--header-color) 50%, white);
-            transform: translateY(-2.5px);
-        }
+    &:hover {
+        color: color-mix(in srgb, var(--header-color) 50%, white);
+        transform: translateY(-2.5px);
 
-        &:active {
-            color: white;
+    }
 
-            /* -webkit-filter: invert(100%);
+    &:active {
+        color: white;
+
+        /* -webkit-filter: invert(100%);
             filter: invert(100%); */
 
-            /* transform: translateY(calc(50dvh - 50%)); */
-        }
+        /* transform: translateY(calc(50dvh - 50%)); */
     }
 }
 
-.hamburger-menu {
-    display: flex;
+.title__icon {
+    position: fixed;
+    right: 0;
+    padding-right: 1%;
+    padding-top: 1%;
+
+}
+
+/* #title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 10px;
+    height: 2px;
+    background-color: greenyellow;
+    transform: translateY(-5px);
+    transition: width 0.25s ease-out;
+}
+
+#title:hover::after {
+    width: 100%;
+} */
+
+
+#hamburger-menu {
+    display: none;
     flex-direction: column;
+    gap: 1.5rem;
     text-align: center;
 
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
 
-    border-top: 0.2rem solid black;
-    /* display: none; */
+    border-top: 0.1rem solid black;
     z-index: 10;
 }
 
