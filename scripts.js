@@ -1,31 +1,43 @@
+const hamMenu = document.getElementById("hamburger-menu");
+const title = document.getElementById("title");
+const titleIcon = document.querySelector(".title__icon")
 
-
-document.getElementById("title").addEventListener("click", titleAction)
-document.querySelector(".title__icon").addEventListener("click", titleAction)
+title.addEventListener("click", titleAction)
+titleIcon.addEventListener("click", titleAction)
 
 document.querySelector("main").addEventListener("click", hideHamburgerMenu)
 document.querySelector("footer").addEventListener("click", hideHamburgerMenu)
 
 
 function titleAction() {
-    const menu = document.getElementById("hamburger-menu");
-    const title = document.getElementById("title");
-    if (menu.style.display === "flex") { // press when menu
-        menu.style.display = "none";
+    if (hamMenu.style.display === "flex") { // press when menu / acts as link
         window.location.href = "/"
-    } else { // press when no menu / opens
-        menu.style.display = "flex"
 
+    } else { // press when no menu / opens
+        hamMenu.style.display = "flex"
         // needs to be like this else the blur woudn't work
-        menu.style.transform = "translateY(" + title.offsetHeight + "px)"
+        hamMenu.style.transform = "translateY(" + title.offsetHeight + "px)"
         title.style.textDecoration = "underline"
 
-        function hideHamburgerMenu() {
-            menu.style.display = "none"
+        titleIcon.removeEventListener("click", titleAction)
+        titleIcon.addEventListener("click", hideHamburgerMenu)
 
-        }
+        titleIcon.innerHTML = "&#10005;"
+
+
 
 
 
     }
+}
+
+function hideHamburgerMenu() {
+    hamMenu.style.display = "none"
+    title.style.textDecoration = "none"
+
+    titleIcon.removeEventListener("click", hideHamburgerMenu)
+    titleIcon.addEventListener("click", titleAction)
+
+    titleIcon.innerHTML = "&#x2630;"
+
 }
