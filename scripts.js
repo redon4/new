@@ -7,8 +7,11 @@ let hamMenuHidden = true;
 title.addEventListener("click", titleAction)
 titleIcon.addEventListener("click", titleAction)
 
-document.querySelector("main").addEventListener("click", hideHamburgerMenu)
-document.querySelector("footer").addEventListener("click", hideHamburgerMenu)
+
+
+// so that it starts out of screen (here not css because wrong height in css)
+hamMenu.style.top = -hamMenu.offsetHeight + "px";
+
 
 
 function titleAction() {
@@ -16,10 +19,12 @@ function titleAction() {
         window.location.href = "/"
 
     } else { // press when no menu / opens
+        document.querySelector("main").addEventListener("click", hideHamburgerMenu);
+        document.querySelector("footer").addEventListener("click", hideHamburgerMenu);
+
         hamMenuHidden = false;
-        hamMenu.style.transition = "transform 0.7s ease-in-out"
         // needs to be like this else the blur woudn't work
-        hamMenu.style.transform = "translateY(" + title.offsetHeight + "px)"
+        hamMenu.style.transform = "translateY(" + (title.offsetHeight + hamMenu.offsetHeight) + "px)"
         title.style.textDecoration = "underline"
 
         titleIcon.removeEventListener("click", titleAction)
@@ -36,8 +41,12 @@ function titleAction() {
 }
 
 function hideHamburgerMenu() {
+    document.querySelector("main").removeEventListener("click", hideHamburgerMenu);
+    document.querySelector("footer").removeEventListener("click", hideHamburgerMenu);
+
+
     hamMenuHidden = true;
-    hamMenu.style.transform = "translateY(" + (-title.offsetHeight - hamMenu.offsetHeight) + "px)"
+    hamMenu.style.transform = "translateY(0)"
 
     title.style.textDecoration = "none"
 

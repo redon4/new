@@ -129,15 +129,15 @@ header {
     text-align: center;
 
     position: fixed;
-    top: 0;
     left: 0;
     right: 0;
 
     border-top: 0.1rem solid black;
+    /* under header */
     z-index: 1;
 
-    transform: translateY(-100%);
-
+    /* for smooth movment */
+    transition: transform 0.7s ease-in-out;
 }
 
 .hamburger-menu__link {
