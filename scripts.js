@@ -4,57 +4,64 @@ const titleIcon = document.querySelector(".title__icon");
 
 let hamMenuHidden = true;
 
-title.addEventListener("click", titleAction)
-titleIcon.addEventListener("click", titleAction)
+// base config of buttons
+title.addEventListener("click", hamMenuToggle)
+titleIcon.addEventListener("click", hamMenuToggle)
 
 
-
-// so that it starts out of screen (here not css because wrong height in css)
+// so that it starts out of screen (not in css file because wrong height in css)
 hamMenu.style.top = -hamMenu.offsetHeight + "px";
 
+// fn only because its used two times (used by title)
+function gotoRoot() {
+    window.location.href = "/"
+
+}
+
+function hamMenuToggle() {
+    if (hamMenuHidden === false) {
+        hamMenuHidden = true;
+
+        // make anywhere no longer hide the menu
+        document.querySelector("main").removeEventListener("click", hamMenuToggle);
+        document.querySelector("footer").removeEventListener("click", hamMenuToggle);
+
+        // for switching it to the open button
+        title.style.textDecoration = "none";
+        title.removeEventListener("click", gotoRoot);
+        title.addEventListener("click", hamMenuToggle);
+
+        // move it out of sight
+        hamMenu.style.transform = "translateY(0)";
+
+        // switch it to menu symbol / to og pos (og pos there because of line 12)
+        titleIcon.innerHTML = "&#x2630;";
 
 
-function titleAction() {
-    if (hamMenuHidden === false) { // press when menu / acts as link
-        window.location.href = "/"
+        // titleIcon.style.transform = "translateY(-50%) rotate(0deg)"
 
-    } else { // press when no menu / opens
-        document.querySelector("main").addEventListener("click", hideHamburgerMenu);
-        document.querySelector("footer").addEventListener("click", hideHamburgerMenu);
-
+    } else { // open menu
         hamMenuHidden = false;
+
+        // for closing the menu when tapping anywhere
+        document.querySelector("main").addEventListener("click", hamMenuToggle);
+        document.querySelector("footer").addEventListener("click", hamMenuToggle);
+
+        // for switching the title to a link
+        title.style.textDecoration = "underline";
+        title.removeEventListener("click", hamMenuToggle);
+        title.addEventListener("click", gotoRoot);
+
+
         // needs to be like this else the blur woudn't work
-        hamMenu.style.transform = "translateY(" + (title.offsetHeight + hamMenu.offsetHeight) + "px)"
-        title.style.textDecoration = "underline"
+        // move it into sight
+        hamMenu.style.transform = "translateY(" + (title.offsetHeight + hamMenu.offsetHeight) + "px)";
 
-        titleIcon.removeEventListener("click", titleAction)
-        titleIcon.addEventListener("click", hideHamburgerMenu)
+        // switch icon to x
+        titleIcon.innerHTML = "&#10005;";
 
-        titleIcon.style.transform = "translateY(-50%)"; // rotate(360deg)";
-        titleIcon.innerHTML = "&#10005;"
-
-
-
-
+        // titleIcon.style.transform = "translateY(-50%)"; // rotate(360deg)";
 
     }
 }
 
-function hideHamburgerMenu() {
-    document.querySelector("main").removeEventListener("click", hideHamburgerMenu);
-    document.querySelector("footer").removeEventListener("click", hideHamburgerMenu);
-
-
-    hamMenuHidden = true;
-    hamMenu.style.transform = "translateY(0)"
-
-    title.style.textDecoration = "none"
-
-    titleIcon.removeEventListener("click", hideHamburgerMenu)
-    titleIcon.addEventListener("click", titleAction)
-
-
-    // titleIcon.style.transform = "translateY(-50%) rotate(0deg)"
-    titleIcon.innerHTML = "&#x2630;"
-
-}
