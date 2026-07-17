@@ -12,11 +12,14 @@ titleIcon.addEventListener("click", hamMenuToggle)
 // so that it starts out of screen (not in css file because wrong height in css)
 hamMenu.style.top = -hamMenu.offsetHeight + "px";
 
-// fn only because its used two times (used by title)
-function gotoRoot() {
-    window.location.href = "/"
-
+// switches the event on obj from f1 to f2
+function switchEventListener(obj, event, f1, f2) {
+    obj.removeEventListener(event, f1);
+    obj.addEventListener(event, f2);
 }
+
+// fn only because its used two times (used by title)
+function gotoRoot() { window.location.href = "/" }
 
 function hamMenuToggle() {
     if (hamMenuHidden === false) {
@@ -28,8 +31,7 @@ function hamMenuToggle() {
 
         // for switching it to the open button
         title.style.textDecoration = "none";
-        title.removeEventListener("click", gotoRoot);
-        title.addEventListener("click", hamMenuToggle);
+        switchEventListener(title, "click", gotoRoot, hamMenuToggle);
 
         // move it out of sight
         hamMenu.style.transform = "translateY(0)";
@@ -49,8 +51,7 @@ function hamMenuToggle() {
 
         // for switching the title to a link
         title.style.textDecoration = "underline";
-        title.removeEventListener("click", hamMenuToggle);
-        title.addEventListener("click", gotoRoot);
+        switchEventListener(title, "click", hamMenuToggle, gotoRoot);
 
 
         // needs to be like this else the blur woudn't work
