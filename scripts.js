@@ -1,15 +1,17 @@
 const hamMenu = document.getElementById("hamburger-menu");
 const title = document.getElementById("title");
 const titleIcon = document.querySelector(".title__icon");
+const hamMenuOverlay = document.querySelector(".hamburger-menu__overlay")
 
 let hamMenuHidden = true;
+let hamMenuOverlayIsAnimating = false;
 
 // base config of buttons
-title.addEventListener("click", hamMenuToggle);
-titleIcon.addEventListener("click", hamMenuToggle);
+[title, titleIcon, hamMenuOverlay].forEach((el) => {
+    el.addEventListener("click", hamMenuToggle)
+})
 
-
-// so that it starts out of screen (not in css file because wrong height in css)
+// so that it starts out of screen (not in css file because height not in css)
 hamMenu.style.top = -hamMenu.offsetHeight + "px";
 
 // switches the event on obj from f1 to f2
@@ -23,15 +25,35 @@ function switchEventListener(obj, event, f1, f2) {
 function gotoRoot() { window.location.href = "/" }
 
 function hamMenuToggle() {
+    if (hamMenuOverlayIsAnimating === true) { return }
+
     if (hamMenuHidden === false) {
+        hamMenuOverlayIsAnimating = true;
         hamMenuHidden = true;
 
-        // make anywhere no longer hide the menu
-        ["main", "footer"].forEach((name) => {
-            document.querySelector(name)?.removeEventListener("click", hamMenuToggle)
-        });
+        // hide the overlay
+        hamMenuOverlay.style.opacity = 0;
 
-        // for switching it to the open button
+        // so that you can't click it twice and break it
+        hamMenuOverlay.removeEventListener("click", hamMenuToggle)
+
+        // use setTimeout so that it waits for the animation to finish before hiding
+        setTimeout(() => {
+            hamMenuOverlay.style.visibility = "hidden";
+            hamMenuOverlayIsAnimating = false;
+        },
+            // get float from string
+            parseFloat(
+                // get string value of the var
+                getComputedStyle(hamMenuOverlay)
+                    .getPropertyValue("--animation-duration")
+            )
+            // s => ms ( example 0.1s => 100ms )
+            * 1000
+        )
+
+
+        // switch it to the open button
         title.style.textDecoration = "none";
         switchEventListener(title, "click", gotoRoot, hamMenuToggle);
 
@@ -44,12 +66,15 @@ function hamMenuToggle() {
     } else { // open menu
         hamMenuHidden = false;
 
-        // for closing the menu when tapping anywhere
-        ["main", "footer"].forEach((name) => {
-            document.querySelector(name)?.addEventListener("click", hamMenuToggle)
-        });
+        // show the overlay
+        hamMenuOverlay.style.opacity = 0.2;
 
-        // for switching the title to a link
+        // so that you can't click it twice and break it
+        hamMenuOverlay.addEventListener("click", hamMenuToggle)
+
+        hamMenuOverlay.style.visibility = "visible";
+
+        // switch the title to a link
         title.style.textDecoration = "underline";
         switchEventListener(title, "click", hamMenuToggle, gotoRoot);
 
