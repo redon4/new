@@ -11,8 +11,12 @@ let hamMenuOverlayIsAnimating = false;
     el.addEventListener("click", hamMenuToggle)
 })
 
-// so that it starts out of screen (not in css file because height not in css)
-hamMenu.style.top = -hamMenu.offsetHeight + "px";
+// waits for the first frame to render the menu out of bounds
+requestAnimationFrame(() => {
+    // so that it starts out off screen (not in css file because height not in css)
+    hamMenu.style.display = "flex"
+    hamMenu.style.top = -hamMenu.offsetHeight + "px";
+})
 
 // switches the event on obj from f1 to f2
 function switchEventListener(obj, event, f1, f2) {
@@ -22,7 +26,7 @@ function switchEventListener(obj, event, f1, f2) {
 
 
 // fn only because its used two times (used by title)
-function gotoRoot() { window.location.href = "/" }
+// function gotoRoot() { window.location.href = "/" }
 
 function hamMenuToggle() {
     if (hamMenuOverlayIsAnimating === true) { return }
@@ -55,7 +59,9 @@ function hamMenuToggle() {
 
         // switch it to the open button
         title.style.textDecoration = "none";
-        switchEventListener(title, "click", gotoRoot, hamMenuToggle);
+        // switchEventListener(title, "click", gotoRoot, hamMenuToggle);
+        title.addEventListener("click", hamMenuToggle);
+        title.removeAttribute("href");
 
         // move it out of sight / to og pos (og pos there because of line 12)
         hamMenu.style.transform = "translateY(0)";
@@ -76,7 +82,17 @@ function hamMenuToggle() {
 
         // switch the title to a link
         title.style.textDecoration = "underline";
-        switchEventListener(title, "click", hamMenuToggle, gotoRoot);
+        // switchEventListener(title, "click", hamMenuToggle, gotoRoot);
+        title.removeEventListener("click", hamMenuToggle);
+        // wait 1 ms before doing the href set to root, else it would get activated
+        // fun fact: same result if you wait (in ms):
+        // 10 ** -10000000000000000000000000000
+        // thats a number with more zeros than atoms in the universe lol
+        setTimeout(() => {
+            title.setAttribute("href", "/")
+        }, 1)
+
+
 
 
         // needs to be like this else the blur woudn't work

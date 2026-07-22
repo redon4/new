@@ -15,6 +15,15 @@ body {
     box-sizing: border-box;
 } */
 
+
+h1 {
+    font-size: 2.6rem;
+}
+
+p {
+    font-size: 1.5rem;
+}
+
 body {
     color: white;
 
@@ -66,7 +75,6 @@ header {
     cursor: pointer;
 
     font-weight: 700;
-    width: 100dvw;
     text-decoration: none;
 
     display: inline-flex;
@@ -85,6 +93,12 @@ header {
         /* -webkit-filter: invert(100%);
             filter: invert(100%); */
     }
+}
+
+#title { 
+    /* this font would be used if it was a button element, changed it to an a  
+    and to still have the same font this is here */
+    font-family: MS Shell Dlg \32;
 }
 
 #title:hover {
@@ -123,7 +137,7 @@ header {
 
 
 #hamburger-menu {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 1.5rem;
     text-align: center;
@@ -161,4 +175,14 @@ header {
     --animation-duration: 0.2s;
     transition: opacity var(--animation-duration) ease-in-out;
 
+}
+
+
+.main__title {
+    text-align: center;
+    margin-top: 1%;
+}
+
+.main__title__description {
+    text-align: center;
 }
