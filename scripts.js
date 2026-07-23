@@ -24,10 +24,6 @@ function switchEventListener(obj, event, f1, f2) {
     obj.addEventListener(event, f2);
 }
 
-
-// fn only because its used two times (used by title)
-// function gotoRoot() { window.location.href = "/" }
-
 function hamMenuToggle() {
     if (hamMenuOverlayIsAnimating === true) { return }
 
@@ -56,14 +52,12 @@ function hamMenuToggle() {
             * 1000
         )
 
-
         // switch it to the open button
         title.style.textDecoration = "none";
-        // switchEventListener(title, "click", gotoRoot, hamMenuToggle);
         title.addEventListener("click", hamMenuToggle);
         title.removeAttribute("href");
 
-        // move it out of sight / to og pos (og pos there because of line 12)
+        // move it out of sight / to og pos (og pos there because of line 17)
         hamMenu.style.transform = "translateY(0)";
 
         // switch it to menu symbol 
@@ -82,9 +76,8 @@ function hamMenuToggle() {
 
         // switch the title to a link
         title.style.textDecoration = "underline";
-        // switchEventListener(title, "click", hamMenuToggle, gotoRoot);
         title.removeEventListener("click", hamMenuToggle);
-        // wait 1 ms before doing the href set to root, else it would get activated
+        // wait 1 ms before doing the href set to root, else it would get activated and move you to "/"
         // fun fact: same result if you wait (in ms):
         // 10 ** -10000000000000000000000000000
         // thats a number with more zeros than atoms in the universe lol
@@ -92,10 +85,9 @@ function hamMenuToggle() {
             title.setAttribute("href", "/")
         }, 1)
 
-
-
-
-        // needs to be like this else the blur woudn't work
+        // needs to be like this else the blur wouldn't work
+        // (it can't be outside its parent (else the blur doesn't work) and to
+        //  be exactly under the header you need to get its height using js)
         // move it into sight
         hamMenu.style.transform = "translateY(" + (title.offsetHeight + hamMenu.offsetHeight) + "px)";
 
@@ -103,4 +95,3 @@ function hamMenuToggle() {
         titleIcon.innerHTML = "&#10005;";
     }
 }
-

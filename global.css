@@ -95,8 +95,8 @@ header {
     }
 }
 
-#title { 
-    /* this font would be used if it was a button element, changed it to an a  
+#title {
+    /* this font would be used if it was a button element, but I changed it to an a  
     and to still have the same font this is here */
     font-family: "MS Shell Dlg 2", Tahoma, system-ui, -apple-system, sans-serif;
 }
